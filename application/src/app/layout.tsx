@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import Topbar from "@/components/Topbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "aiseogen",
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <Topbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

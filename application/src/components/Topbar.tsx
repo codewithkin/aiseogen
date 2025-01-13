@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Topbar() {
   return (
-    <section className="w-full px-2 py-2 md:px-8 md:py-4 flex justify-between items-center border-b-2 border-gray-300">
+    <section className="w-full px-2 py-2 md:px-8 md:py-4 flex justify-between items-center border-b border-gray-200">
         <h2 className="text-2xl font-semibold">AISEOgen</h2>
 
         <article className="flex items-center justify-center gap-2">
