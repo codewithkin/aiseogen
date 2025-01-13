@@ -7,18 +7,6 @@ import { getBestKeywords } from "@/lib/getBestKeywords";
 import getSiteSeoData from "@/lib/getSiteSeoData";
 
 export async function POST(req: NextRequest) {
-  // Setup cors
-  const corsHeaders = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Authorization",
-  };
-
-  if (req.method === "OPTIONS") {
-    return NextResponse.json({}, { headers: corsHeaders });
-  }
-
-    
     // get the formdata from the request
     const {
       url, 
@@ -61,10 +49,22 @@ export async function POST(req: NextRequest) {
     const seoData = await getSiteSeoData(keywords, url, description);
 
     // Close the browser
-    await browser.close(); 
+    await browser.close();
+    
+    const origin = req.headers.get("origin");
+    const allowedOrigins = [
+      "www.aiseogen.com",
+      "https://aiseogen.com",
+      "localhost:3000"
+    ]
+    const accessOrigin = allowedOrigins.find((myOrigin: string) => myOrigin === origin);
 
     return NextResponse.json({
       seoData
-    });
+    }, {
+      headers: {
+        "Access-Control-Allow-Origin": accessOrigin || allowedOrigins[0]
+      }
+    })
 }
 
