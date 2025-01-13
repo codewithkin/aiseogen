@@ -12,7 +12,12 @@ export async function submit(formData: FormData) {
     })
 
     const data = await res.json();
-    console.log(data)
 
-    return data;
+    // Get the keywords from the response
+    const keywords = data.keywords;
+
+    // Find out which keywords are best perfoming
+    const bestKeywords = await getBestKeywords(keywords);
+
+    return keywords;
 }
