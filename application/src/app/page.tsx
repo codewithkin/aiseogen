@@ -25,8 +25,7 @@ export default function Home() {
         method: "POST",
         body: JSON.stringify({url, description}),
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
+          "Content-Type": "application/json"
         }
     })
 
@@ -47,6 +46,17 @@ export default function Home() {
 
   return data ? <SeoResults data={data} /> : (
     <form onSubmit={handleSubmit} className="px-4 md:px-64 lg:px-80 py-10">
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6071419245494198"
+        crossOrigin="anonymous"></script>
+    <ins className="adsbygoogle"
+        style={{display: "block"}}
+        data-ad-client="ca-pub-6071419245494198"
+        data-ad-slot="9448868815"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
       <h2 className="text-2xl font-semibold">Let's get started</h2>
 
       <article className="grid my-4 gap-1">
@@ -66,6 +76,18 @@ export default function Home() {
           required  
         />
       </article>
+
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6071419245494198"
+        crossOrigin="anonymous"></script>
+    <ins className="adsbygoogle"
+        style={{display: "block"}}
+        data-ad-client="ca-pub-6071419245494198"
+        data-ad-slot="9448868815"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
 
       <SubmitButton pending={loading} />
     </form>
