@@ -17,6 +17,9 @@ export async function POST(req: NextRequest) {
     const content = await page.content();
     console.log(content);
 
+    // Close the browser
+    await browser.close();
+
     return NextResponse.json({message: "Hello World"})
 }
 
