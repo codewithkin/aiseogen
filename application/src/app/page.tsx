@@ -4,12 +4,45 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SubmitButton } from "@/components/ui/SubmitButton";
 import { Textarea } from "@/components/ui/textarea";
-import { submit } from "@/lib/actions";
+import { useState } from "react";
+import { SeoData } from "@/lib/types";
+import { SeoResults } from "@/components/SeoResults";
+import { json } from "stream/consumers";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<null | SeoData>(null);
 
-  return (
-    <form action={submit} className="px-4 md:px-64 lg:px-80 py-10">
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    try {
+      setLoading(true);
+      e.preventDefault();
+    const form = e.target as HTMLFormElement;
+    const url = (form.elements.namedItem('url') as HTMLInputElement).value;
+    const description = (form.elements.namedItem('description') as HTMLInputElement).value;
+
+    const res = await fetch(`${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://aiseogen.com"}/api/generate`, {
+        method: "POST",
+        body: JSON.stringify({url, description})
+    })
+
+      const myData: {seoData: string} | null = await res.json();
+      if(!myData) {
+        throw new Error("No data returned from server");
+      }
+
+      const ss: SeoData = JSON.parse(myData.seoData);
+
+      setData(ss);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return data ? <SeoResults data={data} /> : (
+    <form onSubmit={handleSubmit} className="px-4 md:px-64 lg:px-80 py-10">
       <h2 className="text-2xl font-semibold">Let's get started</h2>
 
       <article className="grid my-4 gap-1">
@@ -30,7 +63,7 @@ export default function Home() {
         />
       </article>
 
-      <SubmitButton />
+      <SubmitButton pending={loading} />
     </form>
   )
 }

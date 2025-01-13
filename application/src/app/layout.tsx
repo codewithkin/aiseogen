@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Topbar from "@/components/Topbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata: Metadata = {
   title: "aiseogen",
@@ -22,6 +23,7 @@ export default function RootLayout({
         <Topbar />
         {children}
         <Footer />
+        <Toaster richColors />
       </body>
     </html>
   );

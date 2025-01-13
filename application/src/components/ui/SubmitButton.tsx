@@ -1,9 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Loader2, Sparkles } from "lucide-react";
-import { useFormStatus } from "react-dom";
 
-export function SubmitButton() {
-    const {pending} = useFormStatus()
+export function SubmitButton({pending}: {pending: boolean}) {
 
   return (
     <Button className="bg-gradient-to-tr from-blue-500 to-purple-500 text-white hover:bg-gradient-to-tr hover:from-purple-500 hover:to-blue-500 transition-all duration-300">
