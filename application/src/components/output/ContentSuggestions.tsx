@@ -1,3 +1,5 @@
+"use client";
+
 import { SeoData } from "@/lib/types";
 import { Button } from "../ui/button";
 import { copyToClipboard } from "./copyToClipboard";
@@ -5,7 +7,7 @@ import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 
-export default async function ({data}: {data: SeoData}) {
+export default function ({data}: {data: SeoData}) {
     const [copied, setCopied] = useState<boolean>(false);
 
     return (
