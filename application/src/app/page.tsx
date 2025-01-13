@@ -23,7 +23,11 @@ export default function Home() {
 
     const res = await fetch(`${process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://aiseogen.com"}/api/generate`, {
         method: "POST",
-        body: JSON.stringify({url, description})
+        body: JSON.stringify({url, description}),
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
     })
 
       const myData: {seoData: string} | null = await res.json();
