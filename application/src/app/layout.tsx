@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import Topbar from "@/components/Topbar";
 
 export const metadata: Metadata = {
   title: "aiseogen",
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>{children}</body>
+      <body className={`${inter.className}`}>
+        <Topbar />
+        {children}
+      </body>
     </html>
   );
 }
