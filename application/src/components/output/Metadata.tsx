@@ -30,7 +30,6 @@ export default function Metadata ({data}: {data: any}) {
             <Button
             variant="outline"
             size="sm"
-            className="bg-green-400 text-white"
             onClick={() =>  { 
               copyToClipboard(JSON.stringify(data.metadata, null, 2)); 
               setCopied(true)

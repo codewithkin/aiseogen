@@ -15,19 +15,17 @@ export async function POST(req: NextRequest) {
       url, 
       description
     } = await req.json();
-    const dummyKeywords = ["mvp development agency", "minimum viable product services", "startup mvp solutions", "custom mvp development", "mvp app development", "product market fit analysis", "rapid prototyping agency", "mvp software development", "lean startup mvp", "mvp development process"];
-
     const isLocal = !!process.env.CHROME_EXECUTABLE_PATH;
 
     // Create a new puppetteer instance
     const browser = await puppeteer.launch({
-        args: isLocal ? puppeteer.defaultArgs() : chromium.args,
+        args: isLocal ? puppeteer.defaultArgs() : [...chromium.args, "--no-sandbox", "--hide-scrollbars", "--incognito"],
         defaultViewport: chromium.defaultViewport,
-        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath(),
+        executablePath: process.env.CHROME_EXECUTABLE_PATH || await chromium.executablePath("https://drive.google.com/file/d/1DUEBvx-W_JHwWWa4jsSi5_bAGR_gX1tj/view?usp=sharing"),
         headless: chromium.headless,
-    });
+    })
 
-    // Create a new pave instance
+    // Create a new page instance
     const page = await browser.newPage();
 
     // Navigate to the URL
@@ -61,6 +59,7 @@ export async function POST(req: NextRequest) {
       "https://aiseogen.com",
       "http://localhost:3000"
     ]
+
     const accessOrigin = allowedOrigins.find((myOrigin: string) => myOrigin === origin);
 
     return NextResponse.json({
