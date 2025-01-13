@@ -54,8 +54,9 @@ export async function POST(req: NextRequest) {
     const origin = req.headers.get("origin");
     const allowedOrigins = [
       "www.aiseogen.com",
+      "https://www.aiseogen.com",
       "https://aiseogen.com",
-      "localhost:3000"
+      "http://localhost:3000"
     ]
     const accessOrigin = allowedOrigins.find((myOrigin: string) => myOrigin === origin);
 
