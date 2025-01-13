@@ -55,7 +55,7 @@ export default function Home() {
         data-ad-format="auto"
         data-full-width-responsive="true"></ins>
     <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        <p>(adsbygoogle = window.adsbygoogle || []).push({})</p>
     </script>
       <h2 className="text-2xl font-semibold">Let's get started</h2>
 
