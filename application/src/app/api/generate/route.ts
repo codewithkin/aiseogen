@@ -10,6 +10,7 @@ chromium.setHeadlessMode = true;
 chromium.setGraphicsMode = false;
 
 export async function POST(req: NextRequest) {
+  try {
     // get the formdata from the request
     const {
       url, 
@@ -65,9 +66,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       seoData
     }, {
+      status: 200,
       headers: {
         "Access-Control-Allow-Origin": accessOrigin || allowedOrigins[0]
       }
+    }) 
+  } catch (e) {
+    console.log(e);
+    
+    return NextResponse.json({
+      error: e
+    }, {
+      status: 500
     })
+  }
 }
 

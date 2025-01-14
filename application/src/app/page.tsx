@@ -8,6 +8,7 @@ import { useState } from "react";
 import { SeoData } from "@/lib/types";
 import { SeoResults } from "@/components/SeoResults";
 import { json } from "stream/consumers";
+import { toast } from "sonner";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -30,8 +31,14 @@ export default function Home() {
     })
 
       const myData: {seoData: string} | null = await res.json();
+
       if(!myData) {
         throw new Error("No data returned from server");
+      }
+
+      if(res.status !== 200) {
+        console.log("An error occured on the server");
+        return toast.error("An error occured, please try again later");
       }
 
       const ss: SeoData = JSON.parse(myData.seoData);
